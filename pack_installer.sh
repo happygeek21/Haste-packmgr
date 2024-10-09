@@ -7,13 +7,27 @@ prompt_install() {
 
     if [[ "$out" == "y" || "$out" == "Y" ]]; then
         sudo pacman -Sy --noconfirm
+
+        read -p "Update System With Packages for Pacman? (y/n)  " ch
+
+             if [[ "$ch" == "y" || "$ch" == "y" ]]; then
+
+                  echo"Updating System Now.."
+                  sudo pacman -Syu --noconfirm
+
+
+
     elif [[ "$out" == "n" || "$out" == "N" ]]; then
         # Update system packages
-        read -p "Update System With Packages for Pacman? (y/n) UPDATE THE REPOSITORY BEFORE UPGRADING THE SYSTEM RECOMMENDED!!! " ch
+        
+        read -p "UPDATE THE REPOSITORY BEFORE UPGRADING THE SYSTEM RECOMMENDED!!! Update Repo now? (Y/n)" ch
+        if [["$ch" == "y" || $ch == "Y"]]; then
 
-        if [[ "$ch" == "y" || "$ch" == "Y" ]]; then
-            echo"Updating System Now.."
-            sudo pacman -Syu --noconfirm
+            prompt_install
+
+        read -p "Update System With Packages for Pacman? (y/n)  " ch
+
+     
         else
             exit
         fi
