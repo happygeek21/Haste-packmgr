@@ -56,6 +56,8 @@ prompt_install() {
     read -p "Do you wish to continue (y/n)? " choice
 
     if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
+        
+        
         yay_app_install() {
             for package in "${yay_pack[@]}"; do
                 yay -S "$package" --noconfirm
@@ -65,6 +67,7 @@ prompt_install() {
 
     elif [[ "$choice" == "n" || "$choice" == "N" ]]; then
         echo "Skipping yay Installation..."
+        exit
     else
         echo "Wrong Option Exiting..."
         exit
