@@ -12,6 +12,7 @@ prompt_install() {
         read -p "Update System With Packages for Pacman? (y/n) UPDATE THE REPOSITORY BEFORE UPGRADING THE SYSTEM RECOMMENDED!!! " ch
 
         if [[ "$ch" == "y" || "$ch" == "Y" ]]; then
+            echo"Updating System Now.."
             sudo pacman -Syu --noconfirm
         else
             exit
