@@ -10,28 +10,19 @@ prompt_install() {
 
         read -p "Update System With Packages for Pacman? (y/n)  " ch
 
-             if [[ "$ch" == "y" || "$ch" == "y" ]]; then
-
-                  echo"Updating System Now.."
-                  sudo pacman -Syu --noconfirm
-
-
-
+        if [[ "$ch" == "y" || "$ch" == "Y" ]]; then
+            echo "Updating System Now..."
+            sudo pacman -Syu --noconfirm
+        fi
     elif [[ "$out" == "n" || "$out" == "N" ]]; then
-        # Update system packages
-        
+        # Ask to update the repository before upgrading the system
         read -p "UPDATE THE REPOSITORY BEFORE UPGRADING THE SYSTEM RECOMMENDED!!! Update Repo now? (Y/n)" ch
-        if [["$ch" == "y" || $ch == "Y"]]; then
-
-            prompt_install
-
-        read -p "Update System With Packages for Pacman? (y/n)  " ch
-
-     
+        if [[ "$ch" == "y" || "$ch" == "Y" ]]; then
+            prompt_install  # Recursively call the function
         else
             exit
         fi
-    else 
+    else
         exit
     fi
 
@@ -57,13 +48,14 @@ prompt_install() {
         exit
     fi
 
-    echo -e "Get Ready, Going to install these packages from yay (AUR helper):\n${packages[@]}"
+    # List of yay packages
+    yay_pack=("vscodium-bin" "spotube-bin")
+
+    echo -e "Get Ready, Going to install these packages from yay (AUR helper):\n${yay_pack[@]}"
 
     read -p "Do you wish to continue (y/n)? " choice
 
     if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
-        yay_pack=("vscodium-bin" "spotube-bin")
-
         yay_app_install() {
             for package in "${yay_pack[@]}"; do
                 yay -S "$package" --noconfirm
@@ -81,4 +73,3 @@ prompt_install() {
 
 # Call the function
 prompt_install
-#ddd
